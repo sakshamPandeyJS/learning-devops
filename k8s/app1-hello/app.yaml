@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1-hello-saksham
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app1-hello-saksham
+  template:
+    metadata:
+      labels:
+        app: app1-hello-saksham
+    spec:
+      containers:
+        - name: app1-hello-saksham
+          image: embarkx/hello-spring:latest
+          env:
+            # - name: ENV_VALUE
+            #   value: "Hello from app.yaml"
+            # - name: DB_PASSWORD
+            #   value: "cGFzc3dvcmQ=" # base64 for 'password'
+          env:
+            - name: ENV_VALUE
+              valueFrom:
+                configMapKeyRef:
+                  name: saksham-app-config
+                  key: SAKSHAM_APP_MESSAGE
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: saksham-db-secret
+                  key: SAKSHAM_DB_PASSWORD
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1-hello-saksham
+spec:
+  selector:
+    app: app1-hello-saksham
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080  
+      nodePort: 32000
