@@ -1,4 +1,4 @@
-name: Hello Node App to Docker
+name: Hello Node App to Docker-Saksham
 
 on:
   push:
@@ -49,5 +49,5 @@ jobs:
                 context: docker/app1-hello/node
                 push: true
                 tags: |
-                    ${{ secrets.DOCKER_USERNAME }}/hello-node:latest
+                    ${{ secrets.DOCKER_USERNAME }}/hello-node:latest-saksham
 
