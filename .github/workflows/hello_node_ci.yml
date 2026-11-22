@@ -3,9 +3,11 @@ name: Hello Node App to Docker-Saksham
 on:
   push:
     branches:
-        - main
-    paths: 
-        - "docker/app1-hello/node"
+      - main
+      - feature/saksham
+    paths:
+      - "docker/app1-hello/node/**"
+      - ".github/workflows/hello_node_ci.yml"
   workflow_dispatch:
 
 jobs:
