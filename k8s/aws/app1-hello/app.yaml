@@ -30,7 +30,7 @@ spec:
           #     valueFrom:
           #       secretKeyRef:
           #         name: hello-db-secret
-          #         key: HELLO_DB_PASSWORD
+          #         key: HELLO_DB_PASSWORDD
           ports:
             - containerPort: 3000
 ---
